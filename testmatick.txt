@@ -1,0 +1,245 @@
+import java.util.*;
+
+
+class Shape{
+    String colorCode;
+    int random_color;
+
+    public void color(){
+         Random col = new Random();
+         
+         random_color = col.nextInt(0xffffff + 1);
+         colorCode = String.format("#%06x", random_color); 
+         
+     }
+}
+
+class square extends Shape{
+    
+    private double side;
+    double area;
+    
+    double getSide(){
+        return side;
+    }
+    
+    void setSide(double Sside){
+        side=Sside;
+    }
+    
+   
+    public void area(){
+        area=side*2;
+    }
+    
+    
+    
+    public void output(){
+        System.out.println("Shape: Square, Side: " +side+" units, Area: " +area+ " sq, color: "+colorCode);
+    }
+}
+
+class trapezoid extends Shape{
+    
+    private double a,b,c,d,h;
+    double Tarea;
+    
+    
+    double getA(){
+        return a;
+    }
+    
+    void setA(double upperBase){
+        a=upperBase;
+    }
+    
+    double getB(){
+        return b;
+    }
+    
+    void setB(double lowerBase){
+        b=lowerBase;
+    }
+    
+    double getC(){
+        return c;
+    }
+    
+    void setC(double rightSide){
+        c=rightSide;
+    }
+    
+    double getD(){
+        return d;
+    }
+    
+    void setD(double leftSide){
+        d=leftSide;
+    }
+    
+    double getH(){
+        return h;
+    }
+    
+    void setH(double height){
+        
+        h=height;
+    
+    }
+    
+    public void Trape_area(){
+        
+        Tarea=h*((a+b)/2);
+    
+    }
+    
+    public void Trape_output(){
+        System.out.println("Shape: Trapezoid, Upperbase: " +a+" units, Lowerbase: " +b+" units, Rightside: " +c+" units, Leftside: " +d+" units, Area: " +Tarea+ " sq, color: "+colorCode);
+    }
+}
+
+class triangle extends Shape{
+    
+    private double a,b,hypo;
+    double area;
+    
+    
+    double getSideA(){
+        return a;
+    }
+    
+    void setSideA(double TriA){
+        a=TriA;
+    }
+    
+    double getSideB(){
+        return b;
+    }
+    
+    void setSideB(double TriB){
+        b=TriB;
+    }
+    
+    public void Triarea(){
+    
+        area=0.5*b*a;
+    }
+    
+    public void hypotenuse(){
+        hypo=Math.sqrt(Math.pow(a,2) + Math.pow(b,2)); 
+    }
+    public void Trioutput(){
+        
+        System.out.println("Shape: Triangle, SideA: " +a+" units, SideB: "+b+" units, Height: "+a+" units, Area: " +area+ " sq, hypo: "+hypo+" units, Base: "+b+ " units, color: "+colorCode);
+        
+}
+}
+
+class circle extends Shape{
+    
+    private double circum=0.0,diameter,radius,Pi=3.14;
+    double area;
+    String color;
+    
+    double getRadius(){
+        return radius;
+    }
+    
+    void setRadius(double r){
+        radius=r;
+    }
+    
+    public void diameter(){
+        diameter=2*radius;
+    }
+   
+   public void circumference(){
+       circum=2*Pi*radius;
+   }
+   
+    public void Cirarea(){
+        area=Pi*Math.pow(radius,2);
+    }
+    
+    public void Ciroutput(){
+        System.out.println("Shape: Circle, Circumference: " +circum+" units, Diameter: "+diameter+" units, Radius= "+radius+" units, Area: " +area+ " sq, color: "+colorCode);
+    }
+}
+
+public class testmatick{
+
+     public static void main(String []args){
+        
+         Random rand = new Random(); 
+         
+         int upperbound = 25;
+         int lowerbound = 8;
+         
+         square s = new square();
+         trapezoid t = new trapezoid();
+         triangle tri = new triangle();
+         circle cir = new circle();
+         
+         Shape [] array = new Shape[rand.nextInt(upperbound)];
+
+            for (int i=0;i<array.length;i++){
+            double rnd = Math.random();
+
+            if (rnd>0.0 && rnd <=0.25) {
+            array[i] = cir;
+            cir.setRadius(rand.nextInt(upperbound -1) + 1);
+         double cirR= cir.getRadius();
+         cir.circumference();
+         cir.diameter();
+         cir.color();
+         cir.Cirarea();
+         cir.Ciroutput();
+         
+        }
+
+            else if (rnd >= 0.26 && rnd<=0.50){
+            array[i] = tri;
+            tri.setSideA(rand.nextInt(upperbound -1) + 1);
+         double triA= tri.getSideA();
+         tri.setSideB(rand.nextInt(upperbound -1) + 1);
+         double triB= tri.getSideB();
+         tri.hypotenuse();
+         tri.color();
+         tri.Triarea();
+         tri.Trioutput();
+         
+        }
+
+            else if (rnd >=0.51 && rnd <=0.75){
+            array[i] = s;
+            s.setSide(rand.nextInt(upperbound -1) + 1);
+         double sside = s.getSide();
+         s.color();
+         s.area();
+         s.output();
+      }  
+      
+            else {array[i]= t;
+            
+            t.setA(rand.nextInt(upperbound -1) + 1);
+         double tA = t.getA();
+         t.setB(rand.nextInt(upperbound -1) + 1);
+         double tB = t.getB();
+         t.setC(rand.nextInt(upperbound -1) + 1);
+         double tC = t.getC();
+         t.setD(rand.nextInt(upperbound -1) + 1);
+         double tD = t.getD();
+         t.setH(rand.nextInt(lowerbound));
+         double tH= t.getH();
+         t.color();
+         t.Trape_area();
+         t.Trape_output();
+            }
+            
+        System.out.println("object_ID: "+i);
+        System.out.println();
+     }
+     }
+}
+//Code written by Leeroy A Bananga 
+//An online IDE was used to compile the code, link=>https://www.jdoodle.com/online-java-compiler/
